@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SafeShift</string>
+    <string name="login">Login</string>
+    <string name="register">Sign Up</string>
+    <string name="email_id">Email ID</string>
+    <string name="password">Password</string>
+    <string name="click_to_login">Click to login</string>
+    <string name="registerNow">Click to register</string>
+    <string name="sign_out">Sign out</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "14046484770",
+    "project_id": "safeshift-ac39a",
+    "storage_bucket": "safeshift-ac39a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14046484770:android:41b1cf84b714f8065ded7b",
+        "android_client_info": {
+          "package_name": "com.example.safeshift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14046484770-kmvp1etc5pkjjonvtc4tp45lutcj2vbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgwMZ3E7EWZ3VhDHnaguRhWUXKt0Kyzno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14046484770-kmvp1etc5pkjjonvtc4tp45lutcj2vbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
