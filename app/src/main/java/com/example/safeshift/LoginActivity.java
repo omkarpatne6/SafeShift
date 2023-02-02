@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     ProgressBar progressBar;
     TextView registerTextView;
+    TextView forgotButton;
 
     private FirebaseAuth mAuth;
 
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.login);
         registerTextView = (TextView) findViewById(R.id.loginNow);
         progressBar = (ProgressBar) findViewById(R.id.progressBarLogin);
+        forgotButton = (TextView) findViewById(R.id.forgotPassword);
 
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +65,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        forgotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
                 String email, password;
 
                 email = editTextEmail.getText().toString();
@@ -82,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
