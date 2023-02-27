@@ -36,55 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore db;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // User is signed in, check if profile is completed
-
-            db.collection("users").document(currentUser.getUid())
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-
-                                if (document.exists()) {
-
-                                    // check if profile exists
-                                    boolean isProfileCompleted = document.getBoolean("profileCompleted");
-
-                                    if (isProfileCompleted) {
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Intent intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            } else {
-                                Log.e("FireStoreDocumentError", "Error getting user document from Firestore", task.getException());
-                            }
-                        }
-                    });
-
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         login = findViewById(R.id.login);
@@ -119,11 +76,13 @@ public class LoginActivity extends AppCompatActivity {
                 password = editTextPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
+                    editTextEmail.setError("Enter your email");
                     Toast.makeText(LoginActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
+                    editTextPassword.setError("Enter your password");
                     Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
                     return;
                 }
