@@ -44,15 +44,14 @@ public class SplashActivity extends AppCompatActivity {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             boolean isProfileComplete = document.getBoolean("profileCompleted");
+                                            Intent intent;
                                             if (isProfileComplete) {
-                                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
+                                                intent = new Intent(SplashActivity.this, MainActivity.class);
                                             } else {
-                                                Intent intent = new Intent(SplashActivity.this, AdditionalDetailsActivity.class);
-                                                startActivity(intent);
-                                                finish();
+                                                intent = new Intent(SplashActivity.this, AdditionalDetailsActivity.class);
                                             }
+                                            startActivity(intent);
+                                            finish();
                                         } else {
                                             Log.d("nodocument", "No such document");
                                         }
@@ -68,6 +67,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
 
             }
-        }, 2000);
+        }, 1000);
     }
 }

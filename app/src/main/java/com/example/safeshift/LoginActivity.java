@@ -108,15 +108,24 @@ public class LoginActivity extends AppCompatActivity {
                                                     // check if profile exists
                                                     boolean isProfileCompleted = document.getBoolean("profileCompleted");
 
-                                                    if (isProfileCompleted) {
-                                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                    // check if user is admin or not
+                                                    String accessRole = document.getString("role");
+
+                                                    if (TextUtils.equals(accessRole, "admin")) {
+                                                        Intent intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
                                                         startActivity(intent);
                                                         finish();
                                                     } else {
-                                                        Intent intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
+                                                        Intent intent;
+                                                        if (isProfileCompleted) {
+                                                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                        } else {
+                                                            intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
+                                                        }
                                                         startActivity(intent);
                                                         finish();
                                                     }
+
                                                 }
                                             } else {
                                                 Log.e("FireStoreDocumentError", "Error getting user document from Firestore", task.getException());

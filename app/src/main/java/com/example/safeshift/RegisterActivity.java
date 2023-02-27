@@ -98,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Map<String, Object> userMap = new HashMap<>();
                             userMap.put("email", email);
                             userMap.put("profileCompleted", false);
+                            userMap.put("role", "user");
 
                             db.collection("users").document(userId)
                                     .set(userMap)
