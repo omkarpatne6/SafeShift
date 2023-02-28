@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,14 +45,24 @@ public class SplashActivity extends AppCompatActivity {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             boolean isProfileComplete = document.getBoolean("profileCompleted");
-                                            Intent intent;
-                                            if (isProfileComplete) {
-                                                intent = new Intent(SplashActivity.this, MainActivity.class);
+
+                                            // check if user is admin or not
+                                            String accessRole = document.getString("role");
+
+                                            if (TextUtils.equals(accessRole, "admin")) {
+                                                Intent intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
+                                                startActivity(intent);
+                                                finish();
                                             } else {
-                                                intent = new Intent(SplashActivity.this, AdditionalDetailsActivity.class);
+                                                Intent intent;
+                                                if (isProfileComplete) {
+                                                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                } else {
+                                                    intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
+                                                }
+                                                startActivity(intent);
+                                                finish();
                                             }
-                                            startActivity(intent);
-                                            finish();
                                         } else {
                                             Log.d("nodocument", "No such document");
                                         }
