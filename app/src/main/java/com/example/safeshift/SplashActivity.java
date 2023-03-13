@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,30 +45,51 @@ public class SplashActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
-                                            boolean isProfileComplete = document.getBoolean("profileCompleted");
+                                            // user is a regular user
+                                            // check if profile exists
+                                            boolean isProfileCompleted = document.getBoolean("profileCompleted");
 
-                                            // check if user is admin or not
-                                            String accessRole = document.getString("role");
-
-                                            if (TextUtils.equals(accessRole, "admin")) {
-                                                Intent intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
-                                                startActivity(intent);
-                                                finish();
+                                            Intent intent;
+                                            if (isProfileCompleted) {
+                                                intent = new Intent(getApplicationContext(), MainActivity.class);
                                             } else {
-                                                Intent intent;
-                                                if (isProfileComplete) {
-                                                    intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                } else {
-                                                    intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
-                                                }
-                                                startActivity(intent);
-                                                finish();
+                                                intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
                                             }
+                                            startActivity(intent);
+                                            finish();
+
                                         } else {
-                                            Log.d("nodocument", "No such document");
-                                        }
+                                            // User is an employee
+                                            db.collection("employees")
+                                                    .document(currentUser.getUid())
+                                                    .get()
+                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            if (task.isSuccessful()) {
+                                                                DocumentSnapshot document = task.getResult();
+                                                                if (document.exists()) {
+                                                                    // check if profile exists
+                                                                    boolean isProfileCompleted = document.getBoolean("profileCompleted");
+
+                                                                    Intent intent;
+                                                                    if (isProfileCompleted) {
+                                                                        intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
+                                                                    } else {
+                                                                        intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
+                                                                    }
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                } else {
+                                                                    Toast.makeText(SplashActivity.this, "Invalid user type", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            } else {
+                                                                Log.d("EmployeeDocError", "Error getting employee document", task.getException());
+                                                            }
+                                                        }
+                                                    });                                        }
                                     } else {
-                                        Log.d("failed", "get failed with ", task.getException());
+                                        Log.e("FireStoreDocumentError", "Error getting user document from Firestore", task.getException());
                                     }
                                 }
                             });

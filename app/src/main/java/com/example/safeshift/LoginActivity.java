@@ -19,10 +19,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.FirebaseException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -95,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             db.collection("users").document(user.getUid())
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -104,28 +109,49 @@ public class LoginActivity extends AppCompatActivity {
                                                 DocumentSnapshot document = task.getResult();
 
                                                 if (document.exists()) {
-
+                                                    // user is a regular user
                                                     // check if profile exists
                                                     boolean isProfileCompleted = document.getBoolean("profileCompleted");
 
-                                                    // check if user is admin or not
-                                                    String accessRole = document.getString("role");
-
-                                                    if (TextUtils.equals(accessRole, "admin")) {
-                                                        Intent intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
+                                                    Intent intent;
+                                                    if (isProfileCompleted) {
+                                                        intent = new Intent(getApplicationContext(), MainActivity.class);
                                                     } else {
-                                                        Intent intent;
-                                                        if (isProfileCompleted) {
-                                                            intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                        } else {
-                                                            intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
-                                                        }
-                                                        startActivity(intent);
-                                                        finish();
+                                                        intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
                                                     }
+                                                    startActivity(intent);
+                                                    finish();
 
+                                                } else {
+                                                    // User is an employee
+                                                    db.collection("employees")
+                                                            .document(user.getUid())
+                                                            .get()
+                                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        DocumentSnapshot document = task.getResult();
+                                                                        if (document.exists()) {
+                                                                            // check if profile exists
+                                                                            boolean isProfileCompleted = document.getBoolean("profileCompleted");
+
+                                                                            Intent intent;
+                                                                            if (isProfileCompleted) {
+                                                                                intent = new Intent(getApplicationContext(), AdminPanelActivity.class);
+                                                                            } else {
+                                                                                intent = new Intent(getApplicationContext(), AdditionalDetailsActivity.class);
+                                                                            }
+                                                                            startActivity(intent);
+                                                                            finish();
+                                                                        } else {
+                                                                            Toast.makeText(LoginActivity.this, "Invalid user type", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    } else {
+                                                                        Log.d("EmployeeDocError", "Error getting employee document", task.getException());
+                                                                    }
+                                                                }
+                                                            });
                                                 }
                                             } else {
                                                 Log.e("FireStoreDocumentError", "Error getting user document from Firestore", task.getException());
@@ -134,9 +160,14 @@ public class LoginActivity extends AppCompatActivity {
                                     });
 
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                                Toast.makeText(LoginActivity.this, "Invalid user account", Toast.LENGTH_SHORT).show();
+                            } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                Log.d("EmployeeDocError", "Error getting employee document", task.getException());
+                            }
                         }
                     }
                 });
