@@ -11,4 +11,14 @@
     <string name="forgotButton">Send mail</string>
     <string name="forgot_password_string">Forgot password?</string>
     <string name="confirm">Confirm</string>
+
+    <!-- Define the status array -->
+    <string-array name="status_array">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
+    <!-- Define the status prompt -->
+    <string name="status_prompt">Select Order Status</string>
 </resources>
