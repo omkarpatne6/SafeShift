@@ -50,6 +50,7 @@ public class EmployeeMyOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_my_order);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Initialize Firebase instances
         db = FirebaseFirestore.getInstance();
@@ -184,6 +185,16 @@ public class EmployeeMyOrder extends AppCompatActivity {
                         pickupDateTextView.setText("");
                         statusTextView.setText("");
                     }
+
+                    // Update the employee's availability in Firestore
+                    db.collection("employees").document(employeeId)
+                            .update("available", true)
+                            .addOnSuccessListener(aVoid2 -> {
+                                Log.d("EmployeeMyOrder", "Employee availability updated successfully.");
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e("EmployeeMyOrder", "Error updating employee availability: " + e.getMessage());
+                            });
 
                 })
                 .addOnFailureListener(e -> {

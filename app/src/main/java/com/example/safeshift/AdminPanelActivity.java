@@ -41,7 +41,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         myOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), EmployeeMyOrder.class);
+                Intent intent = new Intent(AdminPanelActivity.this, EmployeeMyOrder.class);
                 startActivity(intent);
                 finish();
             }
