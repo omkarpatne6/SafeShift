@@ -38,12 +38,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-      //  signOutBtn = findViewById(R.id.signOut);
-       // placeOrderBtn = findViewById(R.id.placeOrder);
 
         bottomNavigationView = findViewById(R.id.bnvd);
-
-        //gv=(GridView)findViewById(R.id.gv);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);

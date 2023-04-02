@@ -16,13 +16,11 @@
         android:paddingStart="28dp"
         android:paddingEnd="28dp">
 
-
         <ImageView
             android:layout_width="147dp"
             android:layout_height="82dp"
             android:adjustViewBounds="true"
             android:src="@drawable/img" />
-
 
         <EditText
             android:id="@+id/email"
@@ -34,7 +32,6 @@
             android:padding="12dp"
             android:singleLine="true"
             android:textSize="14sp" />
-
 
         <EditText
             android:id="@+id/password"
@@ -54,7 +51,6 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/registerBtn"
             android:layout_width="match_parent"
@@ -67,7 +63,6 @@
             android:textColor="@color/white"
             app:cornerRadius="4dp" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,13 +70,12 @@
             android:layout_marginTop="12sp"
             android:orientation="horizontal">
 
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="1.5dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="#e2e2e2" />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,11 +87,11 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-
             <View
                 android:layout_width="0dp"
                 android:layout_height="1.5dp"
                 android:layout_weight="1"
+                android:layout_marginTop="10dp"
                 android:background="#e2e2e2" />
 
         </LinearLayout>

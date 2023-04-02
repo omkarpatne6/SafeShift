@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ public class Home extends Fragment
 
     TextView tv;
 
-    Button b1,b2,b3,b4;
+    CardView b1,b2,b3,b4;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -31,8 +32,8 @@ public class Home extends Fragment
         //gv = view.findViewById(id.gv);
        // tv= view.findViewById(R.id.idTVCourse);
 
-        b1=(Button) view.findViewById(R.id.eb1);
-        b2=(Button) view.findViewById(R.id.eb2);
+        b1=(CardView) view.findViewById(R.id.eb1);
+        b2=(CardView) view.findViewById(R.id.eb2);
 
         b1.setOnClickListener(new View.OnClickListener()
         {

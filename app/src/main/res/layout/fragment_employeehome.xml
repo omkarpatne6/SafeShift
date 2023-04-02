@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="412dp"
         android:layout_height="153dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="28dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,38 +32,95 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:rowCount="1"
+        android:columnCount="2"
+        android:layout_marginVertical="150dp"
+        android:padding="20dp"
+        >
 
-    <Button
-        android:id="@+id/eb1"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/eb1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_margin="8dp"
+            android:backgroundTint="#fff"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp">
 
-        android:layout_width="137dp"
-        android:layout_height="142dp"
-        android:backgroundTint="#2196F3"
-        android:drawableTop="@drawable/booking"
-        android:text="Bookings"
-        android:textColor="#090909"
-        android:textColorHint="#0B0B0B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478"
-        tools:ignore="MissingConstraints" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical | center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/eb2"
-        android:layout_width="137dp"
-        android:layout_height="142dp"
-        android:backgroundTint="#2196F3"
-        android:drawableTop="@drawable/history"
-        android:text="History"
-        android:textColor="#090909"
-        android:textColorHint="#0B0B0B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.845" />
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/booking" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Book a slot"
+                    android:textAlignment="center"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/eb2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="8dp"
+            android:backgroundTint="#fff"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_vertical | center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/preview"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Preview"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"
+                    android:textSize="17sp"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </GridLayout>
+
+
+</LinearLayout>
