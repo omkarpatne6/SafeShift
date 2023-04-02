@@ -33,8 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText editTextEmail, editTextPassword;
     Button register;
-    ProgressBar progressBar;
     TextView loginTextView;
+    ProgressDialog progressDialog;
 
     // firebase
     FirebaseAuth mAuth;
@@ -50,8 +50,12 @@ public class RegisterActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.registerBtn);
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         loginTextView = (TextView) findViewById(R.id.registerNow);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading...");
+
 
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +85,14 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
+                progressDialog.show();
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
 
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information

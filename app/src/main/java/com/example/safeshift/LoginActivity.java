@@ -3,6 +3,7 @@ package com.example.safeshift;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -32,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText editTextEmail, editTextPassword;
     Button login;
-    ProgressBar progressBar;
     TextView registerTextView;
     TextView forgotButton;
+    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -50,8 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.password);
         login = findViewById(R.id.login);
         registerTextView = findViewById(R.id.loginNow);
-        progressBar = findViewById(R.id.progressBarLogin);
         forgotButton = findViewById(R.id.forgotPassword);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading...");
 
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,11 +95,15 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
+                progressDialog.show();
+
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
+
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();

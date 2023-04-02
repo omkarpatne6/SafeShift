@@ -35,7 +35,7 @@
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/signOutButton"
         android:layout_width="346dp"
         android:layout_height="64dp"
         android:backgroundTint="#3897f0"

@@ -22,21 +22,31 @@
             android:exported="false" />
         <activity
             android:name=".EmployeeOrderHistoryDetails"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EmployeeOrderHistory"
+            android:label="Order details"/>
+
         <activity
             android:name=".EmployeeOrderHistory"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Order history"
+            android:parentActivityName=".AdminPanelActivity"/>
+
         <activity
             android:name=".EmployeeMyOrder"
             android:exported="false"
+            android:label="My order"
             android:parentActivityName=".AdminPanelActivity" />
+
         <activity
             android:name=".AdminPanelActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Home">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -51,41 +61,53 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".AdditionalDetailsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Additional details">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".ForgotPassword"
-            android:exported="false">
+            android:exported="false"
+            android:label="Reset password"
+            android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".RegisterActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Sign Up">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Login">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Home">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>
