@@ -15,15 +15,21 @@
         android:theme="@style/Theme.MaterialComponents.Light"
         tools:targetApi="31">
         <activity
+            android:name=".Preview"
+            android:exported="false" />
+        <activity
+            android:name=".Booking"
+            android:exported="false" />
+        <activity
             android:name=".EmployeeOrderHistoryDetails"
             android:exported="false" />
         <activity
             android:name=".EmployeeOrderHistory"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".EmployeeMyOrder"
             android:exported="false"
-            android:parentActivityName=".AdminPanelActivity"/>
+            android:parentActivityName=".AdminPanelActivity" />
         <activity
             android:name=".AdminPanelActivity"
             android:exported="false">
