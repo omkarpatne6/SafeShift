@@ -16,9 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Profile extends Fragment {
-    // firestore instance
-    private FirebaseFirestore db;
-
     MaterialButton signOutButton;
 
     @Override
@@ -42,6 +39,7 @@ public class Profile extends Fragment {
                                 // User clicked Yes, sign out
                                 FirebaseAuth.getInstance().signOut();
                                 Intent intent = new Intent(getContext(), LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
                         })
@@ -49,7 +47,6 @@ public class Profile extends Fragment {
                         .show();
             }
         });
-
 
         // Inflate the layout for this fragment
         return view;
