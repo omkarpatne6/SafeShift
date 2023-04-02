@@ -37,7 +37,6 @@
         android:layout_height="230dp"
         android:rowCount="1"
         android:columnCount="2"
-        android:layout_marginVertical="150dp"
         android:padding="20dp"
         >
 
