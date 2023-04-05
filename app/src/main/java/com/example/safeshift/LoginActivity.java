@@ -7,13 +7,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
+    ToggleButton toggleButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,19 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         registerTextView = findViewById(R.id.loginNow);
         forgotButton = findViewById(R.id.forgotPassword);
+        toggleButton = findViewById(R.id.toggleButton);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    toggleButton.setButtonDrawable(R.drawable.eye_show_small);
+                } else {
+                    editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    toggleButton.setButtonDrawable(R.drawable.hidden);
+                }
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);

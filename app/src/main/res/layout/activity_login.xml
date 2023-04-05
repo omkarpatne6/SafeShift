@@ -34,17 +34,35 @@
             android:singleLine="true"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/password"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/edittext"
-            android:drawableRight="@drawable/baseline_remove_red_eye_24"
-            android:hint="Password"
-            android:padding="12dp"
-            android:singleLine="true"
-            android:textSize="14sp" />
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:drawablePadding="12dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/password"
+                android:layout_alignBottom="@id/password"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:button="@drawable/eye_show_small"
+                android:textOff=""
+                android:textOn="" />
+
+        </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/progressBarLogin"
@@ -82,8 +100,8 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="1.5dp"
-                android:layout_weight="1"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:background="#e2e2e2" />
 
             <TextView
@@ -99,8 +117,8 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="1.5dp"
-                android:layout_weight="1"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:background="#e2e2e2" />
 
         </LinearLayout>
