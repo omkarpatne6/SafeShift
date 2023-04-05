@@ -1,64 +1,109 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/background01"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="168dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353"
-        android:drawableRight="@drawable/add"
-        app:srcCompat="@drawable/img" />
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/arrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="188dp"
-        android:layout_height="46dp"
-        android:text="Add Username "
-        android:drawableRight="@drawable/edit"
-        android:textColor="#3F51B5"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.128"
-        tools:ignore="MissingConstraints" />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="41dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="1dp"
+                    android:src="@drawable/update" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signOutButton"
-        android:layout_width="346dp"
-        android:layout_height="64dp"
-        android:backgroundTint="#3897f0"
-        android:padding="12dp"
-        android:text="LOGOUT"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:cornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.288" />
+                <ImageView
+                    android:id="@+id/signOutButton"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="-3dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="1dp"
+                    android:src="@drawable/logout" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="My"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Profile"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="33sp"
+                android:layout_marginStart="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include
+        android:layout_gravity="center"
+        layout="@layout/item_image"
         android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
-        android:text="7083534048"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/materialButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_add"/>
+            <include layout="@layout/item_info"/>
+            <include layout="@layout/item_email"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>
