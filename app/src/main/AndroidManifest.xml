@@ -25,7 +25,8 @@
             android:name=".EmployeeOrderHistoryDetails"
             android:exported="false"
             android:parentActivityName=".EmployeeOrderHistory"
-            android:label="Order details"/>
+            android:label="Order details"
+            />
 
         <activity
             android:name=".EmployeeOrderHistory"

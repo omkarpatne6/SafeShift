@@ -8,6 +8,7 @@
     android:gravity="center">
     <RelativeLayout
         android:layout_centerInParent="true"
+
         android:layout_width="match_parent"
         android:layout_height="250dp">
         <androidx.cardview.widget.CardView
@@ -22,6 +23,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="23dp"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent">
                 <EditText
                     android:layout_marginTop="15dp"

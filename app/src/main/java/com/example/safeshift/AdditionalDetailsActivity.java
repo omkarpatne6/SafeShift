@@ -43,7 +43,7 @@ public class AdditionalDetailsActivity extends AppCompatActivity {
         confirmDetails = findViewById(R.id.additionalDetailsButton);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
-//        signOutButton = findViewById(R.id.signOutButton);
+        //signOutButton = findViewById(R.id.signOutButton);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
