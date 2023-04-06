@@ -47,11 +47,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:padding="5dp"
-                    android:src="@drawable/add2"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"/>
 
             </LinearLayout>
 
@@ -61,19 +56,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                app:tint="@color/black"
-                android:padding="2dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/home"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
                     android:text="Hitech City MMts Station Park"
+                    android:focusable="false"
                     android:textSize="17sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -83,6 +73,7 @@
                 <EditText
                     android:text="Bhagyanager Colony, \nMadhapur Hyderabad,\nTelangana \n500084"
                     android:textSize="13sp"
+                    android:focusable="false"
                     android:textColor="#ED5E5E5E"
                     android:textStyle="normal"
                     android:textAlignment="textStart"

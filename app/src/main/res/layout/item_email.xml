@@ -38,6 +38,7 @@
         </LinearLayout>
         <EditText
             android:text="malakinfoapp@gmail.com"
+            android:focusable="false"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp"

@@ -9,4 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#DADADA</color>
     <color name="green">#f8f8f8</color>
+    <color name="neon">#27E1C1</color>
+    <color name="lb">#B9E9FC</color>
+    <color name="cd">#F3DEBA</color>
+    <color name="sm">#F5F3C1</color>
+    <color name="gg">#16FF00</color>
+    <color name="yellow">#FFED00</color>
+    <color name="gr">#9ACD32</color>
+
+
+
+
 </resources>
