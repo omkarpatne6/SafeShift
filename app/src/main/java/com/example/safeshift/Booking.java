@@ -25,7 +25,6 @@ public class Booking extends AppCompatActivity  {
     Button b1, b2;
     TextView t1, t2;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class Booking extends AppCompatActivity  {
 
         t1 = (TextView) findViewById(R.id.dates);
         t2 = (TextView) findViewById(R.id.times);
-
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +91,8 @@ public class Booking extends AppCompatActivity  {
 
             }
         });
+
+
     }
-
-
-
 
 }

@@ -8,13 +8,6 @@
     android:gravity="center"
     tools:context=".AdditionalDetailsActivity">
 
-    <Button
-        android:id="@+id/uploadImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Image" />
-
-
     <EditText
         android:id="@+id/firstName"
         android:layout_width="wrap_content"

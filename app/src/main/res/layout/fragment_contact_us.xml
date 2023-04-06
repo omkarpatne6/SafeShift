@@ -22,25 +22,19 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Email: yashgumaste@gmail.com"
+        android:textAlignment="viewStart"
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="Email: guptashivamkailash@gmail.com"
+        android:text="Contact: 7517652078"
         android:textAlignment="viewStart"
         android:textSize="20sp" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="Contact: 7083534048"
-        android:textAlignment="viewStart"
-        android:textSize="20sp" />
-
-
-
-
 </LinearLayout>
