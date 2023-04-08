@@ -10,7 +10,6 @@
     app:cardUseCompatPadding="true"
     card_view:cardCornerRAdius="5dp">
     <LinearLayout
-        android:background="@color/main"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,12 +20,12 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:padding="2dp"
-                android:src="@drawable/email"
+                android:src="@drawable/profile_avatar"
                 android:layout_marginStart="5dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
-                android:text="Email"
+                android:text="First name"
                 android:layout_marginStart="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -43,13 +42,13 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
-                android:hint="Email"
+                android:hint="John"
                 android:layout_marginTop="10dp"
-                android:text="malakinfoapp@gmail.com"
+                android:text="John"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:minHeight="48dp"
@@ -59,11 +58,11 @@
                 android:textSize="18sp" />
 
             <ImageButton
-                android:id="@+id/editEmail"
+                android:id="@+id/editFname"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@id/email"
-                android:layout_alignBottom="@id/email"
+                android:layout_alignRight="@id/fname"
+                android:layout_alignBottom="@id/fname"
                 android:layout_centerInParent="true"
                 android:background="@null"
                 android:src="@drawable/edit"

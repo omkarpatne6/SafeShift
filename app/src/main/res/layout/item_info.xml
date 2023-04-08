@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
-            android:padding="3dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -37,16 +37,39 @@
 
 
         </LinearLayout>
-        <EditText
-            android:text="+91 98000000000"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginStart="25dp"
-            android:layout_marginBottom="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:hint="Mobile"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="10dp"
+                android:text="+91 98000000000"
+                android:minHeight="48dp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:id="@+id/editMobileNumber"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/mobileNumber"
+                android:layout_alignBottom="@id/mobileNumber"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:src="@drawable/edit"
+                android:layout_marginBottom="10dp"/>
+
+        </RelativeLayout>
 
 
 

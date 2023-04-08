@@ -21,7 +21,7 @@
             android:layout_width="147dp"
             android:layout_height="82dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/img" />
+            android:src="@drawable/logo_min" />
 
         <EditText
             android:id="@+id/email"
@@ -59,7 +59,7 @@
                 android:layout_alignBottom="@id/password"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:button="@drawable/eye_show_small"
+                android:button="@drawable/hidden"
                 android:textOff=""
                 android:textOn="" />
 

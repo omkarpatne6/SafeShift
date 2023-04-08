@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     Home h = new Home();
     ContactUs c = new ContactUs();
     Profile p = new Profile();
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
