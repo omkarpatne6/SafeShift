@@ -9,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -138,39 +141,63 @@ public class Booking extends AppCompatActivity  {
                 phone_number = phoneNumber.getText().toString();
                 pickup_location = pickupLocation.getText().toString();
                 destination_location = destinationLocation.getText().toString();
-//                progressBar.setVisibility(View.VISIBLE);
+
+                // show progress dialog
                 progressDialog.show();
 
-                Log.d("pickdest", "hello" + pickup_location + destination_location);
+                // perform network operation in background thread
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        // Define the data to add to the "orders" collection as a HashMap
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("user_id", mAuth.getCurrentUser().getUid());
+                        data.put("firstName", first_name);
+                        data.put("lastName", last_name);
+                        data.put("phoneNumber", phone_number);
+                        data.put("pickup_address", pickup_location);
+                        data.put("destination_address", destination_location);
+                        data.put("pickup_date", date_string);
+                        data.put("pickup_time", time_string);
+                        data.put("status", "Pending");
+                        data.put("employee_id", "null");
+                        // Set the createdAt field to the current timestamp
+                        data.put("createdAt", FieldValue.serverTimestamp());
 
-                // Define the data to add to the "orders" collection as a HashMap
-                Map<String, Object> data = new HashMap<>();
-                data.put("user_id", mAuth.getCurrentUser().getUid());
-                data.put("pickup_address", pickup_location);
-                data.put("destination_address", destination_location);
-                data.put("pickup_date", date_string);
-                data.put("pickup_time", time_string);
-                data.put("status", "pending");
-
-                // Add the data to a new document in the "orders" collection
-                db.collection("orders").add(data)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                progressDialog.dismiss();
-                                Log.d("Success", "added order");
-
-                                Toast.makeText(Booking.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e("OrderError", "added order");
-
-                                Toast.makeText(Booking.this, "Order failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        // Add the data to a new document in the "orders" collection
+                        db.collection("orders").add(data)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                // hide progress dialog and show toast on the UI thread
+                                                progressDialog.dismiss();
+                                                Toast.makeText(Booking.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(Booking.this, UserOrderHistory.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                // hide progress dialog and show error toast on the UI thread
+                                                progressDialog.dismiss();
+                                                Toast.makeText(Booking.this, "Failed to place order", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                });
+                        return null;
+                    }
+                }.execute();
             }
         });
 

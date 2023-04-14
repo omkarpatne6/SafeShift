@@ -194,8 +194,40 @@ public class Profile extends Fragment {
                             firstNameEditText.setText(firstName);
                             lastNameEditText.setText(lastName);
                         } else {
-                            // Document does not exist
-                            Log.e("no document", "document does not exist");
+
+                            // now we will search in employees collection
+                            db.collection("employees")
+                                    .document(user.getUid())
+                                    .get()
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            if (documentSnapshot.exists()) {
+
+                                                // Document exists, get the data and update the UI
+                                                firstName = documentSnapshot.getString("firstName");
+                                                lastName = documentSnapshot.getString("lastName");
+                                                email = documentSnapshot.getString("email");
+                                                role = documentSnapshot.getString("role");
+                                                contactNumber = documentSnapshot.getString("contactNumber");
+
+                                                userNameEditText.setText(firstName + " " + lastName);
+                                                emailEditText.setText(email);
+                                                userId.setText(role + ": " + user.getUid());
+                                                mobileNumberEditText.setText(contactNumber);
+                                                firstNameEditText.setText(firstName);
+                                                lastNameEditText.setText(lastName);
+                                            } else {
+                                                // Document does not exist
+                                                Log.e("no document", "document does not exist");
+                                            }
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

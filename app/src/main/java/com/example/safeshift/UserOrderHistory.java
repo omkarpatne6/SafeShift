@@ -21,16 +21,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class EmployeeOrderHistory extends AppCompatActivity {
+public class UserOrderHistory extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FirebaseFirestore db;
-    MyAdapter myAdapter;
-    ArrayList<PreviousEmployeeOrders> ordersList;
+    MyUserAdapter myAdapter;
+    ArrayList<PreviousUserOrders> ordersList;
 
     ProgressDialog progressDialog;
 
@@ -42,7 +43,7 @@ public class EmployeeOrderHistory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employee_order_history);
+        setContentView(R.layout.activity_user_order_history);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
@@ -61,37 +62,37 @@ public class EmployeeOrderHistory extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ordersList = new ArrayList<PreviousEmployeeOrders>();
-        myAdapter = new MyAdapter(this, ordersList);
+        ordersList = new ArrayList<PreviousUserOrders>();
+        myAdapter = new MyUserAdapter(this, ordersList);
 
         recyclerView.setAdapter(myAdapter);
 
         // set click listener on adapter
-        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+        myAdapter.setOnItemClickListener(new MyUserAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // start new activity to display details of selected item
-                Toast.makeText(EmployeeOrderHistory.this, "Item clicked at position " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserOrderHistory.this, "Item clicked at position " + position, Toast.LENGTH_SHORT).show();
                 Log.d("clickedEvent", "Item clicked" + position);
 
-                Intent intent = new Intent(EmployeeOrderHistory.this, EmployeeOrderHistoryDetails.class);
-                PreviousEmployeeOrders order = ordersList.get(position);
+                Intent intent = new Intent(UserOrderHistory.this, UserOrderHistoryDetails.class);
+                PreviousUserOrders order = ordersList.get(position);
                 intent.putExtra("order_name", order.getOrder_name());
                 intent.putExtra("pickup_address", order.getPickup_address());
                 intent.putExtra("destination_address", order.getDestination_address());
                 intent.putExtra("pickup_date", order.getPickup_date());
                 intent.putExtra("status", order.getStatus());
+                intent.putExtra("employee_id", order.getEmployee_id());
                 startActivity(intent);
             }
         });
 
         EventChangeListener();
     }
-
     private void EventChangeListener() {
         db.collection("orders")
-                .whereEqualTo("employee_id", currentUser.getUid())
-                .whereEqualTo("status", "Completed")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .whereEqualTo("user_id", currentUser.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -117,7 +118,18 @@ public class EmployeeOrderHistory extends AppCompatActivity {
                         ordersList.clear(); // clear the list to avoid duplicates
 
                         for (DocumentSnapshot doc: value.getDocuments()) {
-                            PreviousEmployeeOrders order = new PreviousEmployeeOrders();
+                            PreviousUserOrders order = new PreviousUserOrders();
+
+                            String assignedEmployee;
+
+                            if (doc.getString("employee_id").equals("null")) {
+
+                                assignedEmployee = "No employee assigned";
+
+                            } else {
+                                assignedEmployee = doc.getString("employee_id");
+                            }
+                            order.setEmployee_id(assignedEmployee);
                             order.setOrder_name(doc.getString("pickup_address") + " => " + doc.getString("destination_address"));
                             order.setPickup_address(doc.getString("pickup_address"));
                             order.setDestination_address(doc.getString("destination_address"));

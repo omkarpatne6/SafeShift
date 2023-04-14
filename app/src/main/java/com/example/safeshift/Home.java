@@ -51,7 +51,7 @@ public class Home extends Fragment
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(view.getContext(), Preview.class);
+                Intent i = new Intent(view.getContext(), UserOrderHistory.class);
                 i.putExtra("Value2", "Android By Javatpoint");
                 startActivity(i);
             }
