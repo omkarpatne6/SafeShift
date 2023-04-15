@@ -42,6 +42,8 @@ public class Profile extends Fragment {
 
     StorageReference storageRef, imageRef;
 
+    ShapeableImageView profileImageView;
+
     TextView userId;
 
     EditText userNameEditText, emailEditText, mobileNumberEditText, firstNameEditText, lastNameEditText;
@@ -77,8 +79,6 @@ public class Profile extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
-
-        ShapeableImageView profileImageView;
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
