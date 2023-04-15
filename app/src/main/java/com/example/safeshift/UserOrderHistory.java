@@ -91,7 +91,7 @@ public class UserOrderHistory extends AppCompatActivity {
     }
     private void EventChangeListener() {
         db.collection("orders")
-                .orderBy("createdAt", Query.Direction.DESCENDING)
+//                .orderBy("createdAt", Query.Direction.DESCENDING)
                 .whereEqualTo("user_id", currentUser.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -109,11 +109,13 @@ public class UserOrderHistory extends AppCompatActivity {
                                 progressDialog.dismiss();
                             }
                             noPreviousOrder.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
                             // show a message to the user here indicating that no orders were found
                             return;
                         }
 
                         noPreviousOrder.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
 
                         ordersList.clear(); // clear the list to avoid duplicates
 

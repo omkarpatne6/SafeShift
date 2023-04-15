@@ -48,7 +48,6 @@ public class Profile extends Fragment {
     ImageButton editUserNameBtn, editEmail, editMobileNumber, editFname, editLname;
     String firstName, lastName, email, role, contactNumber;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
